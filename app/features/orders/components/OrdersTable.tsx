@@ -42,35 +42,48 @@ export function OrdersTable({ orders }: OrdersTableProps) {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-100">
-            {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-50">
-                <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                  {order.id}
-                </td>
+          {orders.length > 0 ? (
+            <tbody className="divide-y divide-gray-100">
+              {orders.map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50">
+                  <td className="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                    {order.id}
+                  </td>
 
-                <td className="whitespace-nowrap px-6 py-4 text-gray-700">
-                  {order.customer}
-                </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                    {order.customer}
+                  </td>
 
-                <td className="whitespace-nowrap px-6 py-4 text-gray-700">
-                  {numberFormatter.format(order.price)}
-                </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                    {numberFormatter.format(order.price)}
+                  </td>
 
-                <td className="whitespace-nowrap px-6 py-4 text-gray-700">
-                  {numberFormatter.format(order.items)}
-                </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-gray-700">
+                    {numberFormatter.format(order.items)}
+                  </td>
 
-                <td className="whitespace-nowrap px-6 py-4">
-                  <OrderStatusBadge status={order.status} />
-                </td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    <OrderStatusBadge status={order.status} />
+                  </td>
 
-                <td className="whitespace-nowrap px-6 py-4 text-gray-600">
-                  {dateFormatter.format(new Date(order.createdAt))}
+                  <td className="whitespace-nowrap px-6 py-4 text-gray-600">
+                    {dateFormatter.format(new Date(order.createdAt))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr>
+                <td
+                  colSpan={6}
+                  className="px-6 py-12 text-center text-gray-500"
+                >
+                  سفارشی مطابق جستجو و فیلترهای انتخاب‌شده پیدا نشد.
                 </td>
               </tr>
-            ))}
-          </tbody>
+            </tbody>
+          )}
         </table>
       </div>
     </div>
