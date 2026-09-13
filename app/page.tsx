@@ -6,6 +6,8 @@ import { OrdersTable } from "./features/orders/components/OrdersTable";
 import { OrdersToolbar } from "./features/orders/components/OrdersToolbar";
 import { orders } from "./features/orders/data/orders";
 import type { OrderStatus } from "./features/orders/types/order";
+import OrderDetailsModal from "./features/orders/components/OrderDetailsModal";
+import type { Order } from "./features/orders/types/order";
 
 export default function Home() {
   const PAGE_SIZE = 10;
@@ -17,6 +19,7 @@ export default function Home() {
   const [sortField, setSortField] = useState<SortField>("createdAt");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   const processedOrders = useMemo(() => {
     const normalizedSearch = search.trim().toLowerCase();
@@ -108,7 +111,10 @@ export default function Home() {
           onSortDirectionChange={handleSortDirectionChange}
         />
 
-        <OrdersTable orders={paginatedOrders} />
+        <OrdersTable
+          orders={paginatedOrders}
+          onOrderSelect={setSelectedOrder}
+        />
 
         <OrdersPagination
           currentPage={validCurrentPage}
@@ -118,6 +124,13 @@ export default function Home() {
           onPageChange={setCurrentPage}
         />
       </div>
+
+      {selectedOrder && (
+        <OrderDetailsModal
+          order={selectedOrder}
+          onClose={() => setSelectedOrder(null)}
+        />
+      )}
     </main>
   );
 }

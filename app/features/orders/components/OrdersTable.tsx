@@ -3,6 +3,7 @@ import { OrderStatusBadge } from "./OrderStatusBadge";
 
 type OrdersTableProps = {
   orders: Order[];
+  onOrderSelect: (order: Order) => void;
 };
 
 const numberFormatter = new Intl.NumberFormat("fa-IR");
@@ -14,7 +15,7 @@ const dateFormatter = new Intl.DateTimeFormat("fa-IR", {
   day: "numeric",
 });
 
-export function OrdersTable({ orders }: OrdersTableProps) {
+export function OrdersTable({ orders, onOrderSelect }: OrdersTableProps) {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <div className="overflow-x-auto">
@@ -38,6 +39,12 @@ export function OrdersTable({ orders }: OrdersTableProps) {
               </th>
               <th scope="col" className="px-6 py-4 font-semibold text-gray-700">
                 تاریخ ثبت
+              </th>
+              <th
+                scope="col"
+                className="px-4 py-3 text-right text-sm font-semibold text-gray-700"
+              >
+                جزئیات
               </th>
             </tr>
           </thead>
@@ -68,6 +75,16 @@ export function OrdersTable({ orders }: OrdersTableProps) {
 
                   <td className="whitespace-nowrap px-6 py-4 text-gray-600">
                     {dateFormatter.format(new Date(order.createdAt))}
+                  </td>
+
+                  <td className="px-4 py-4 text-right">
+                    <button
+                      type="button"
+                      onClick={() => onOrderSelect(order)}
+                      className="rounded-md border border-gray-400 bg-white px-3 py-1.5 text-sm font-medium text-gray-800 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    >
+                      مشاهده
+                    </button>
                   </td>
                 </tr>
               ))}
