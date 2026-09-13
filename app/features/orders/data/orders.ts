@@ -8,14 +8,14 @@ const statuses: OrderStatus[] = [
 ];
 
 const customers = [
-  "Ali Ahmadi",
-  "Sara Mohammadi",
-  "Reza Karimi",
-  "Neda Hosseini",
-  "Amir Rahimi",
-  "Mina Jafari",
-  "Omid Moradi",
-  "Sara Ahmadi",
+  "علی احمدی",
+  "سارا محمدی",
+  "رضا کریمی",
+  "ندا حسینی",
+  "امیر رحیمی",
+  "مینا جعفری",
+  "امید مرادی",
+  "سارا احمدی",
 ];
 
 export const orders: Order[] = Array.from({ length: 30 }, (_, index) => {
